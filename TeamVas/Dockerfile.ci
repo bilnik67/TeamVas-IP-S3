@@ -2,13 +2,15 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /app
 
-# Copy and restore
-COPY *.csproj ./
-RUN dotnet restore
+# Copy csproj files and restore
+COPY TeamVas.DAL/TeamVas.DAL.csproj TeamVas.DAL/
+COPY TeamVas.BLogic/TeamVas.BLogic.csproj TeamVas.BLogic/
+COPY TeamVas.API/TeamVas.API.csproj TeamVas.API/
+RUN dotnet restore TeamVas.API/TeamVas.API.csproj
 
 # Copy everything else and build
 COPY . ./
-RUN dotnet publish -c Release -o out
+RUN dotnet publish TeamVas.API/TeamVas.API.csproj -c Release -o out
 
 # Use Runtime Image to run the app
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
