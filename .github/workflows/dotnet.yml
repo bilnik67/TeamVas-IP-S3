@@ -17,13 +17,13 @@ jobs:
         dotnet-version: 7.0.x
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: TeamVas
+      working-directory: Backend/TeamVas
     - name: Build
       run: dotnet build --no-restore
-      working-directory: TeamVas
+      working-directory: Backend/TeamVas
     - name: Test
       run: dotnet test --no-build --verbosity normal
-      working-directory: TeamVas
+      working-directory: Backend/TeamVas
       
   build_and_push_docker:
     needs: build_dotnet # This job depends on the successful completion of the build_dotnet job
@@ -43,7 +43,7 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
-        context: ./TeamVas
-        file: TeamVas/Dockerfile.ci
+        context: ./Backend/TeamVas
+        file: ./Backend/TeamVas/Dockerfile.ci
         push: true
         tags: billyyy/teamvas
