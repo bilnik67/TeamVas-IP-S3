@@ -44,6 +44,6 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: ./Backend/TeamVas
-        file: TeamVas/Dockerfile.ci
+        file: /Backend/TeamVas/Dockerfile.ci
         push: true
         tags: billyyy/teamvas
