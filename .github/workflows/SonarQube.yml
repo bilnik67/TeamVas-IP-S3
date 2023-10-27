@@ -28,5 +28,5 @@ jobs:
         working-directory: ./Backend/TeamVas
         run: |
           dotnet sonarscanner begin /k:"Teamvas_backend" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}"
-          dotnet build --no-incremental
+          dotnet build 
           dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}"
