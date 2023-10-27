@@ -61,11 +61,13 @@ jobs:
       - name: Install SonarQube scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: powershell
+        working-directory: ./Frontend/TeamVas
         run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
       - name: Build and analyze
         shell: powershell
+        working-directory: ./Frontend/TeamVas
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Teamvas_frontend" /d:sonar.token="${{ secrets.SONAR_TOKEN_FRONTEND }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
           dotnet build
