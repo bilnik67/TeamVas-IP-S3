@@ -7,8 +7,8 @@ on:
 
 
 jobs:
-  SonarQube-backend:
-    name: SonarQube-backend
+  sonarqube-backend:
+    name: SonarQube Backend
     runs-on: windows-latest
     permissions: read-all
     steps:
@@ -48,8 +48,8 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}"
 
 
-  SonarQube-frontend:
-    name: SonarQube-frontend
+  sonarqube-frontend:
+    name: SonarQube Frontend
     runs-on: ubuntu-latest
     permissions: read-all
     steps:
