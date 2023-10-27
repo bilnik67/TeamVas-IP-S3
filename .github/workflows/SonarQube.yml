@@ -40,9 +40,9 @@ jobs:
         working-directory: ./Backend/TeamVas
         shell: powershell
         run: |
-          dotnet-sonarscanner begin /k:"Teamvas_backend" /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
+          dotnet sonarscanner begin /k:"Teamvas_backend" /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
           dotnet build
-          dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}"
+          dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}"
 
 
   sonarqube-frontend:
