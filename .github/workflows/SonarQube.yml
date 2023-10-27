@@ -33,6 +33,7 @@ jobs:
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
       - name: Install SonarQube scanner
+        working-directory: ./Backend/TeamVas
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: powershell
         run: dotnet tool install --global dotnet-sonarscanner --version 5.14.0
