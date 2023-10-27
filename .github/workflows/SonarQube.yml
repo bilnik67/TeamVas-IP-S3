@@ -7,8 +7,8 @@ on:
 
 
 jobs:
-  build:
-    name: Build
+  SonarQube-backend:
+    name: SonarQube-backend
     runs-on: windows-latest
     permissions: read-all
     steps:
@@ -46,3 +46,17 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Teamvas_backend" /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
           dotnet build
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}"
+
+
+  SonarQube-frontend:
+    name: SonarQube-frontend
+    runs-on: ubuntu-latest
+    permissions: read-all
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 
+      - uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
