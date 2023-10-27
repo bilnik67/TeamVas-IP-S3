@@ -28,9 +28,9 @@ jobs:
       - name: Run SonarQube Analysis
         working-directory: ./Backend/TeamVas
         run: |
-          apt-get update
-          apt-get upgrade
-          apt install openjdk-17-jdk openjdk-17-jre
+          sudo apt-get update
+          sudo apt-get upgrade -y
+          sudo apt install -y openjdk-17-jdk openjdk-17-jre
           dotnet sonarscanner begin /k:"Teamvas_backend" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml /d:sonar.coverage.exclusions="**/Program.cs,**/dbContext.cs"
           dotnet build --no-incremental
           dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
