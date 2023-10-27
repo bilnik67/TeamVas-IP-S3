@@ -34,11 +34,13 @@ jobs:
           restore-keys: ${{ runner.os }}-sonar-scanner
       - name: Install SonarQube scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        working-directory: ./Backend/TeamVas
         shell: powershell
         run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
       - name: Build and analyze
+        working-directory: ./Backend/TeamVas
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Teamvas_backend" /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
