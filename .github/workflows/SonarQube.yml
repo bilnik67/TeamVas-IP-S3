@@ -31,30 +31,30 @@ jobs:
           dotnet build 
           dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}"
 
- sonarqube-analysis-frontend:
+  sonarqube-analysis-frontend:
     runs-on: ubuntu-latest
     permissions: read-all
     
     steps:
-    - name: Checkout Repository
-    uses: actions/checkout@v2
-    with:
-    fetch-depth: 0
-    
-    - name: Setup Node
-    uses: actions/setup-node@v1
-    with:
-    node-version: 16
-    
-    - name: Restore dependencies
-    run: |
-    yarn install
-    working-directory: ./Application/Frontend/GamifyWork
-    
-    - name: SonarQube Analysis
-    uses: sonarsource/sonarqube-scan-action@master
-    with:
-    projectBaseDir: ./Application/Frontend/GamifyWork
-    env:
-    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
-    SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      
+      - name: Restore dependencies
+        run: |
+          yarn install
+          working-directory: ./Backend/TeamVas
+      
+      - name: SonarQube Analysis
+        uses: sonarsource/sonarqube-scan-action@master
+        with:
+          projectBaseDir: ./Backend/TeamVas
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
