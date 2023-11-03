@@ -8,7 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.13" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TeamVas.BLogic\TeamVas.BLogic.csproj" />
+    <ProjectReference Include="..\TeamVas.DAL\TeamVas.DAL.csproj" />
   </ItemGroup>
 
 </Project>
