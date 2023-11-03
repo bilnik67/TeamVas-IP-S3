@@ -49,12 +49,12 @@ jobs:
       - name: Restore dependencies
         run: |
           yarn install
-          working-directory: ./Backend/TeamVas
+        working-directory: ./Frontend/TeamVas
       
       - name: SonarQube Analysis
         uses: sonarsource/sonarqube-scan-action@master
         with:
-          projectBaseDir: ./Backend/TeamVas
+          projectBaseDir: ./Frontend/TeamVas
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
