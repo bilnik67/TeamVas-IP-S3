@@ -21,6 +21,9 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
       working-directory: Backend/TeamVas
+  test_dotnet:
+    runs-on: ubuntu-latest
+    steps:
     - name: Test
       run: dotnet test --no-build --verbosity normal
       working-directory: Backend/TeamVas
