@@ -27,7 +27,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Test
-      run: dotnet test --no-build --verbosity normal .Teamvas.Tests/teamvas.Tests.csproj
+      run: dotnet test --no-build --verbosity normal .TeamVas.Tests/TeamVas.Tests.csproj
       working-directory: Backend/TeamVas
       
   build_and_push_docker:
