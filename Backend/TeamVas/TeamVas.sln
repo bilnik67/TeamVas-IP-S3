@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamVas.BLogic", "TeamVas.B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamVas.DAL", "TeamVas.DAL\TeamVas.DAL.csproj", "{5A9F95C3-AC15-4D13-B8F8-214F679A3263}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teamvas.Tests", "teamvas.Tests\Teamvas.Tests.csproj", "{846CE5F5-FDE2-4BB1-A5C6-CC806CDAB68A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamVas.Tests", "TeamVas.Tests\TeamVas.Tests.csproj", "{9CB1F43D-1F40-46A0-9184-2DD00F461B73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{5A9F95C3-AC15-4D13-B8F8-214F679A3263}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A9F95C3-AC15-4D13-B8F8-214F679A3263}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A9F95C3-AC15-4D13-B8F8-214F679A3263}.Release|Any CPU.Build.0 = Release|Any CPU
-		{846CE5F5-FDE2-4BB1-A5C6-CC806CDAB68A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{846CE5F5-FDE2-4BB1-A5C6-CC806CDAB68A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{846CE5F5-FDE2-4BB1-A5C6-CC806CDAB68A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{846CE5F5-FDE2-4BB1-A5C6-CC806CDAB68A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CB1F43D-1F40-46A0-9184-2DD00F461B73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CB1F43D-1F40-46A0-9184-2DD00F461B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CB1F43D-1F40-46A0-9184-2DD00F461B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CB1F43D-1F40-46A0-9184-2DD00F461B73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

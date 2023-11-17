@@ -38,7 +38,7 @@ namespace teamvas.Tests.Unit_Tests
         {
             // Actt
             var courses = await _courseService.GetAllCoursesAsync();
-            
+
 
             // Assert
             Assert.AreEqual(2, courses.Count());
