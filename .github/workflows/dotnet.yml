@@ -27,8 +27,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Test
-      run: dotnet test --no-build --verbosity normal .TeamVas.Tests/TeamVas.Tests.csproj
-      working-directory: Backend/TeamVas
+      run: dotnet test --no-build --verbosity normal 
+      working-directory: Backend/TeamVas/TeamVas.Tests/TeamVas.Tests.csproj
       
   build_and_push_docker:
     needs: unittest_dotnet # This job depends on the successful completion of the build_dotnet job
