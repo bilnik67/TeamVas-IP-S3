@@ -21,17 +21,17 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
       working-directory: Backend/TeamVas
-  test_dotnet:
+  unittest_dotnet:
     needs: build_dotnet
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal .Teamvas.Tests/teamvas.Tests.csproj
       working-directory: Backend/TeamVas
       
   build_and_push_docker:
-    needs: test_dotnet # This job depends on the successful completion of the build_dotnet job
+    needs: unittest_dotnet # This job depends on the successful completion of the build_dotnet job
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2 
