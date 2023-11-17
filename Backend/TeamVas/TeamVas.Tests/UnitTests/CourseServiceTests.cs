@@ -23,12 +23,12 @@ namespace teamvas.Tests.Unit_Tests
             _mockRepo.Setup(repo => repo.GetAllCoursesAsync())
                 .ReturnsAsync(new List<Course>
                 {
-                    new Course { Id = 1, Name = "Course 1", Description = "Description 1" },
-                    new Course { Id = 2, Name = "Course 2", Description = "Description 2" }
-                });
+                    new Course(1, "Course 1", "Description 1"),
+                    new Course(2, "Course 2", "Description 2")
+                });;
 
             _mockRepo.Setup(repo => repo.GetCourseByIdAsync(It.IsAny<int>()))
-                .ReturnsAsync((int id) => new Course { Id = id, Name = $"Course {id}", Description = $"Description {id}" });
+                .ReturnsAsync((int id) => new Course(id, "Course {id}", "Description {id}"));
 
             _courseService = new CourseService(_mockRepo.Object);
         }

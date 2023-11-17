@@ -20,24 +20,14 @@ namespace TeamVas.BLogic.Services
         public async Task<IEnumerable<CourseModel>> GetAllCoursesAsync()
         {
             var courses = await _courseRepository.GetAllCoursesAsync();
-            return courses.Select(c => new CourseModel
-            {
-                Id = c.Id,
-                Name = c.Name,
-                Description = c.Description,
-            }).ToList();
+            return courses.Select(c => new CourseModel(c.Id, c.Name, c.Description)).ToList();
         }
 
         public async Task<CourseModel> GetCourseByIdAsync(int courseId)
         {
             var course = await _courseRepository.GetCourseByIdAsync(courseId);
 
-            return new CourseModel
-            {
-                Id = course.Id,
-                Name = course.Name,
-                Description = course.Description,
-            };
+            return new CourseModel(course.Id, course.Name, course.Description);
         }
 
     }
