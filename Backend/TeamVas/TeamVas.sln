@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamVas.BLogic", "TeamVas.B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamVas.DAL", "TeamVas.DAL\TeamVas.DAL.csproj", "{5A9F95C3-AC15-4D13-B8F8-214F679A3263}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "teamvas.Tests", "teamvas.Tests\teamvas.Tests.csproj", "{846CE5F5-FDE2-4BB1-A5C6-CC806CDAB68A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teamvas.Tests", "teamvas.Tests\Teamvas.Tests.csproj", "{846CE5F5-FDE2-4BB1-A5C6-CC806CDAB68A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
