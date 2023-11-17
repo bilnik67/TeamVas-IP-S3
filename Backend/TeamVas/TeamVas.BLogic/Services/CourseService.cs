@@ -24,6 +24,7 @@ namespace TeamVas.BLogic.Services
             {
                 Id = c.Id,
                 Name = c.Name,
+                Description = c.Description,
             }).ToList();
         }
 
@@ -35,6 +36,7 @@ namespace TeamVas.BLogic.Services
             {
                 Id = course.Id,
                 Name = course.Name,
+                Description = course.Description,
             };
         }
 

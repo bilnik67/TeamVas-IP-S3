@@ -2,22 +2,21 @@ using TeamVas.BLogic.Services;
 using TeamVas.DAL;
 using TeamVas.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddDbContext<EducationalContext>(options =>
+    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
+    new MySqlServerVersion(new Version(8, 0, 21))));
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Dependency Injection for Services and Repositories
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<ICourseService, CourseService>();
-
-var connectionString = builder.Configuration.GetConnectionString("YourConnectionStringName");
-builder.Services.AddDbContext<EducationalContext>(options =>
-    options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 

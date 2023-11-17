@@ -19,12 +19,12 @@ namespace TeamVas.DAL.Repositories
 
         public async Task<List<Course>> GetAllCoursesAsync()
         {
-            return await _context.Courses.ToListAsync();
+            return await _context.Course.ToListAsync();
         }
 
         public async Task<Course> GetCourseByIdAsync(int courseId)
         {
-            var course = await _context.Courses
+            var course = await _context.Course
                 .FirstOrDefaultAsync(c => c.Id == courseId);
 
             if (course == null)
@@ -37,7 +37,7 @@ namespace TeamVas.DAL.Repositories
 
         public async Task<Course> AddCourseAsync(Course course)
         {
-            _context.Courses.Add(course);
+            _context.Course.Add(course);
             await _context.SaveChangesAsync();
             return course; 
         }
@@ -50,10 +50,10 @@ namespace TeamVas.DAL.Repositories
 
         public async Task DeleteCourseAsync(int courseId)
         {
-            var course = await _context.Courses.FindAsync(courseId);
+            var course = await _context.Course.FindAsync(courseId);
             if (course != null)
             {
-                _context.Courses.Remove(course);
+                _context.Course.Remove(course);
                 await _context.SaveChangesAsync();
             }
         }

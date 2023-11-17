@@ -15,6 +15,6 @@ namespace TeamVas.DAL
         {
         }
 
-        public DbSet<Course> Courses { get; set; }
+        public DbSet<Course> Course { get; set; }
     }
 }
