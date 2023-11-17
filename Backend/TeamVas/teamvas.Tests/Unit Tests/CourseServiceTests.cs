@@ -36,7 +36,7 @@ namespace teamvas.Tests.Unit_Tests
         [TestMethod]
         public async Task GetAllCoursesAsync_ReturnsAllCourses()
         {
-            // Act
+            // Actt
             var courses = await _courseService.GetAllCoursesAsync();
             
 
