@@ -29,6 +29,7 @@ jobs:
         run: |
           dotnet sonarscanner begin /k:"Teamvas_backend" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}"
           dotnet build 
+          dotnet-coverage collect "dotnet test TeamVas.sln" -f xml -o "coverage.xml"
           dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}"
 
   sonarqube-analysis-frontend:
