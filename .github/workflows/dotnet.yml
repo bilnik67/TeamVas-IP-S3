@@ -21,6 +21,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
       working-directory: Backend/TeamVas
+
   unittest_dotnet:
     needs: build_dotnet
     runs-on: ubuntu-latest
@@ -28,22 +29,66 @@ jobs:
     - uses: actions/checkout@v2
     - name: Test
       run: dotnet test Backend/TeamVas/TeamVas.Tests/TeamVas.Tests.csproj
-      
+
+  sonarqube-analysis-backend:
+    needs: unittest_dotnet
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    - name: Set up JDK 17
+      uses: actions/setup-java@v1
+      with:
+        java-version: 17
+    - name: Install SonarScanner
+      run: dotnet tool install --global dotnet-sonarscanner --version 5.14.0
+    - name: Install dotnet-coverage
+      run: dotnet tool install -g dotnet-coverage
+    - name: Run SonarQube Analysis
+      working-directory: ./Backend/TeamVas
+      run: |
+        dotnet sonarscanner begin /k:"TeamVas_Backend" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}"
+        dotnet build 
+        dotnet-coverage collect "dotnet test TeamVas.sln" -f xml -o "coverage.xml"
+        dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}"
+
+  sonarqube-analysis-frontend:
+    needs: unittest_dotnet
+    runs-on: ubuntu-latest
+    permissions: read-all
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 16
+    - name: Restore dependencies
+      run: |
+        yarn install
+      working-directory: ./Frontend/TeamVas
+    - name: SonarQube Analysis
+      uses: sonarsource/sonarqube-scan-action@master
+      with:
+        projectBaseDir: ./Frontend/TeamVas
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
   build_and_push_docker:
-    needs: unittest_dotnet # This job depends on the successful completion of the build_dotnet job
+    needs: [sonarqube-analysis-backend, sonarqube-analysis-frontend]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2 
-      
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
-      
     - name: Login to DockerHub
       uses: docker/login-action@v1 
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
