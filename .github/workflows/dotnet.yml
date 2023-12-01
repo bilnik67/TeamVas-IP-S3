@@ -44,12 +44,15 @@ jobs:
       run: dotnet tool install --global dotnet-sonarscanner --version 5.14.0
     - name: Install dotnet-coverage
       run: dotnet tool install -g dotnet-coverage
+    - name: List files in Backend/TeamVas
+      working-directory: ./Backend/TeamVas
+      run: ls -la 
     - name: Run SonarQube Analysis
       working-directory: ./Backend/TeamVas
       run: |
         dotnet sonarscanner begin /k:"TeamVas_Backend" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}"
         dotnet build 
-        dotnet test ./Backend/TeamVas/TeamVas.sln --collect:"XPlat Code Coverage"
+        dotnet test TeamVas.sln --collect:"XPlat Code Coverage"
         dotnet-coverage collect "dotnet test TeamVas.sln --collect:"XPlat Code Coverage"" -f xml -o "coverage.xml"
         dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_BACKEND }}"
 
