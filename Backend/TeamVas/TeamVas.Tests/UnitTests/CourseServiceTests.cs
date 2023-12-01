@@ -20,44 +20,44 @@ namespace teamvas.Tests.Unit_Tests
         public void Setup()
         {
             _mockRepo = new Mock<ICourseRepository>();
-            _mockRepo.Setup(repo => repo.GetAllCoursesAsync())
-                .ReturnsAsync(new List<Course>
+            _mockRepo.Setup(repo => repo.GetAllCourses())
+                .Returns(new List<Course>
                 {
                     new Course(1, "Course 1", "Description 1"),
                     new Course(2, "Course 2", "Description 2")
                 });;
 
-            _mockRepo.Setup(repo => repo.GetCourseByIdAsync(It.IsAny<int>()))
-                .ReturnsAsync((int id) => new Course(id, "Course {id}", "Description {id}"));
+            _mockRepo.Setup(repo => repo.GetCourseById(It.IsAny<int>()))
+                .Returns((int id) => new Course(id, "Course {id}", "Description {id}"));
 
             _courseService = new CourseService(_mockRepo.Object);
         }
 
         [TestMethod]
-        public async Task GetAllCoursesAsync_ReturnsAllCourses()
+        public void GetAllCoursesAsync_ReturnsAllCourses()
         {
             // Actt
-            var courses = await _courseService.GetAllCoursesAsync();
+            var courses =  _courseService.GetAllCourses();
 
 
             // Assert
             Assert.AreEqual(2, courses.Count());
-            _mockRepo.Verify(repo => repo.GetAllCoursesAsync(), Times.Once);
+            _mockRepo.Verify(repo => repo.GetAllCourses(), Times.Once);
         }
 
         [TestMethod]
-        public async Task GetCourseByIdAsync_ReturnsCorrectCourse()
+        public void GetCourseByIdAsync_ReturnsCorrectCourse()
         {
             // Arrange
             int courseId = 1;
 
             // Act
-            var course = await _courseService.GetCourseByIdAsync(courseId);
+            var course =  _courseService.GetCourseById(courseId);
 
             // Assert
             Assert.IsNotNull(course);
             Assert.AreEqual(courseId, course.Id);
-            _mockRepo.Verify(repo => repo.GetCourseByIdAsync(courseId), Times.Once);
+            _mockRepo.Verify(repo => repo.GetCourseById(courseId), Times.Once);
         }
     }
 }

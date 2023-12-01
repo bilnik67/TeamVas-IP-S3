@@ -9,7 +9,7 @@ namespace TeamVas.BLogic.Services
 {
     public interface ICourseService
     {
-        Task<IEnumerable<CourseModel>> GetAllCoursesAsync();
-        Task<CourseModel> GetCourseByIdAsync(int courseId);
+        IEnumerable<CourseModel> GetAllCourses();
+        CourseModel GetCourseById(int courseId);
     }
 }

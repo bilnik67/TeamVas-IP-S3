@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TeamVas.API.DTOs;
 using TeamVas.BLogic.Models;
 using TeamVas.BLogic.Services;
 
@@ -15,15 +16,15 @@ namespace TeamVas.API.Controllers
             _courseService = courseService;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CourseModel>>> GetAllCourses()
+        public ActionResult<IEnumerable<CourseDto>> GetAllCourses()
         {
-            var courses = await _courseService.GetAllCoursesAsync();
+            var courses = _courseService.GetAllCourses();
             return Ok(courses);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<CourseModel>> GetCourse(int id)
+        public ActionResult<CourseDto> GetCourse(int id)
         {
-            var course = await _courseService.GetCourseByIdAsync(id);
+            var course = _courseService.GetCourseById(id);
             if (course == null)
             {
                 return NotFound();

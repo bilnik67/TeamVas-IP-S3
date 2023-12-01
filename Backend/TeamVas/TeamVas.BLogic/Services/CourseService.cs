@@ -17,15 +17,15 @@ namespace TeamVas.BLogic.Services
             _courseRepository = courseRepository;
         }
 
-        public async Task<IEnumerable<CourseModel>> GetAllCoursesAsync()
+        public IEnumerable<CourseModel> GetAllCourses()
         {
-            var courses = await _courseRepository.GetAllCoursesAsync();
+            var courses =  _courseRepository.GetAllCourses();
             return courses.Select(c => new CourseModel(c.Id, c.Name, c.Description)).ToList();
         }
 
-        public async Task<CourseModel> GetCourseByIdAsync(int courseId)
+        public CourseModel GetCourseById(int courseId)
         {
-            var course = await _courseRepository.GetCourseByIdAsync(courseId);
+            var course = _courseRepository.GetCourseById(courseId);
 
             return new CourseModel(course.Id, course.Name, course.Description);
         }

@@ -17,15 +17,15 @@ namespace TeamVas.DAL.Repositories
             _context = context;
         }
 
-        public async Task<List<Course>> GetAllCoursesAsync()
+        public List<Course> GetAllCourses()
         {
-            return await _context.Course.ToListAsync();
+            return _context.Course.ToList();
         }
 
-        public async Task<Course> GetCourseByIdAsync(int courseId)
+        public Course GetCourseById(int courseId)
         {
-            var course = await _context.Course
-                .FirstOrDefaultAsync(c => c.Id == courseId);
+            var course = _context.Course
+                .FirstOrDefault(c => c.Id == courseId);
 
             if (course == null)
             {
@@ -35,26 +35,26 @@ namespace TeamVas.DAL.Repositories
             return course;
         }
 
-        public async Task<Course> AddCourseAsync(Course course)
+        public Course AddCourse(Course course)
         {
             _context.Course.Add(course);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return course; 
         }
 
-        public async Task UpdateCourseAsync(Course course)
+        public void UpdateCourse(Course course)
         {
             _context.Entry(course).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
-        public async Task DeleteCourseAsync(int courseId)
+        public void DeleteCourse(int courseId)
         {
-            var course = await _context.Course.FindAsync(courseId);
+            var course = _context.Course.Find(courseId);
             if (course != null)
             {
                 _context.Course.Remove(course);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
         }
     }

@@ -9,10 +9,10 @@ namespace TeamVas.DAL.Repositories
 {
     public interface ICourseRepository
     {
-        Task<List<Course>> GetAllCoursesAsync();
-        Task<Course> GetCourseByIdAsync(int courseId);
-        Task<Course> AddCourseAsync(Course course);
-        Task UpdateCourseAsync(Course course);
-        Task DeleteCourseAsync(int courseId);
+        List<Course> GetAllCourses();
+        Course GetCourseById(int courseId);
+        Course AddCourse(Course course);
+        void UpdateCourse(Course course);
+        void DeleteCourse(int courseId);
     }
 }
