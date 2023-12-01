@@ -47,9 +47,9 @@ jobs:
     - name: Run SonarQube Analysis
       working-directory: ./Backend/TeamVas
       run: |
-        dotnet sonarscanner begin /k:"TeamVas_Backend" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" /d:sonar.login="${{ secrets.SONAR_TOKEN_BACKEND }}" /d:sonar.cs.opencover.reportsPaths="coverage.xml"
-        dotnet build --no-restore
-        dotnet test --no-build --collect:"XPlat Code Coverage"
+        dotnet sonarscanner begin /k:"TeamVas_Backend" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}" /d:sonar.token="${{ secrets.SONAR_TOKEN_BACKEND }}"
+        dotnet build 
+        dotnet-coverage collect "dotnet test TeamVas.sln" -f xml -o "coverage.xml"
         dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_BACKEND }}"
 
   sonarqube-analysis-frontend:
