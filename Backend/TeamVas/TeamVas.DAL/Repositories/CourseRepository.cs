@@ -19,7 +19,14 @@ namespace TeamVas.DAL.Repositories
 
         public List<Course> GetAllCourses()
         {
-            return _context.Course.ToList();
+            var courses = _context.Course.ToList();
+
+            if (!courses.Any()) 
+            {
+                throw new InvalidOperationException("No courses available.");
+            }
+
+            return courses;
         }
 
         public Course GetCourseById(int courseId)

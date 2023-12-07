@@ -1,46 +1,47 @@
 .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 5%;
-    background-color: purple;
-    color: white;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    align-items: center;
-    
-  }
-  
- .logo {
-    padding-bottom: 10px;
-    width: 90%; 
-    height: 100%; 
-    position: relative;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 5%;
+  background-color: purple;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .navbar a, .navbar button {
-    color: white;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    transition: background-color 0.3s;
-  }
+.logo {
+  padding-bottom: 10px;
+  width: 90%; 
+  height: 100%; 
+  position: relative;
+}
 
- .navbar a:not(:last-child),
- .navbar button:not(:last-child) {
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2); 
- }
+.navItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
 
+.navIcon {
+  font-size: 30px;
+  margin-bottom: 5px; /* Adjust as needed */
+}
 
+.navbar a, .navbar button {
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transition: background-color 0.3s;
+}
 
-  
-  .navIcon {
-    font-size: 30px;
-  }
+.navbar a:not(:last-child),
+.navbar button:not(:last-child) {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2); 
+}
 
-  .navbar a:hover, .navbar button:hover {
-    background-color: transparent;
-  }
-
-  
+.navbar a:hover, .navbar button:hover {
+  background-color: transparent;
+}

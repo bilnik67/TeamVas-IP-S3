@@ -1,46 +1,40 @@
-  .courses {
-    font-family: Arial, sans-serif;
-    width: 100%;
-    max-width: 800px;
-    margin: auto;
-  }
-  
-  .category {
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-  }
-  
-  .category-header {
-    background-color: #f5f5f5;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-  }
-  
-  .category-content {
-    padding: 10px;
-  }
-  
-  .course-item {
-    border-top: 1px solid #ddd;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .course-item:first-child {
-    border-top: none;
-  }
-  .categoryName {
-    font-weight: bold;
-    background-color: #f5f5f5;
-    text-align: left;
-  }
 
-  .course-meta {
-    color: #666;
-  } 
-  .coursesContainer {
-    background-color: white;
-  }
+.coursesContainer {
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.masonryLayout {
+  column-count: 4;
+  column-gap: 20px;
+}
+
+.courseTile {
+  background-color: #f5f5f5;
+  break-inside: avoid;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.courseTile:hover {
+  transform: scale(1.05);
+}
+
+.courseTitle {
+  text-align: center;
+  
+}
+
+.courseCard * {
+  -webkit-user-select: none; 
+  -moz-user-select: none; 
+  user-select: none; 
+}

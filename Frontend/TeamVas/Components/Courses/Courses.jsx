@@ -1,77 +1,49 @@
-import React from 'react';
-import './Courses.module.css';
-import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn } from 'mdb-react-ui-kit';
+import React, { useState, useEffect } from 'react';
+import styles from './Courses.module.css';
 
-
-const coursesData = [
-  {
-    category: 'S3 Portfolio - GP and IP',
-    courses: [
-      { title: 'Portfolio S3 DB - Bachelor', date: 'Jan 19, 2024', points: '0 pts' },
-      { title: 'Portfolio S3 DB - Associate Degree', date: 'Jan 19, 2024', points: '0 pts' },
-    ],
-  },
-  {
-    category: 'Assignments Dropbox IP',
-    courses: [
-      { title: 'Feedback Research', date: 'Nov 9', points: '0 pts' },
-      { title: 'Portfolio Feedback 1', date: 'Nov 10', points: '0 pts' },
-    ],
-  },
-];
-
-const Course = ({ title, date, points }) => (
-  <div className="course">
-    <h4>{title}</h4>
-    <p>{date} | {points}</p>
+const CourseTile = ({ name, onClick }) => (
+  <div className={styles.courseCard}>
+    <div className={styles.courseTile} onClick={onClick}>
+      <h2 className={styles.courseTitle}>{name}</h2>
+    </div>
   </div>
-);
 
-const CourseCategory = ({ category, courses }) => (
-  <section>
-    <h3>{category}</h3>
-    {courses.map((course, index) => <Course key={index} {...course} />)}
-  </section>
 );
-
 
 const Courses = () => {
-    return (
-      <div>
-        {coursesData.map((category, categoryIndex) => (
-          <div key={categoryIndex} className="categoryTable">
-            <h2>{category.category}</h2>
-            <MDBTable align='middle'>
-              <MDBTableHead light>
-                <tr>
-                  <th scope='col'>#</th>
-                  <th scope='col'>Title</th>
-                  <th scope='col'>Date</th>
-                  <th scope='col'>Points</th>
-                  <th scope='col'>Actions</th>
-                </tr>
-              </MDBTableHead>
-              <MDBTableBody>
-                {category.courses.map((item, itemIndex) => (
-                  <tr key={`${categoryIndex}-${itemIndex}`}>
-                    <th scope='row'>{itemIndex + 1}</th>
-                    <td>{item.title}</td>
-                    <td>{item.date}</td>
-                    <td>{item.points}</td>
-                    <td>
-                      <MDBBtn color='link' size='sm'>
-                        <i className='fas fa-times'></i>
-                      </MDBBtn>
-                    </td>
-                  </tr>
-                ))}
-              </MDBTableBody>
-            </MDBTable>
-          </div>
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://localhost:7232/Courses');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setCourses(data);
+      } catch (error) {
+        console.error("There was a problem fetching course data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleCourseClick = (course) => {
+    console.log(`Course clicked: ${course.name}`);
+  };
+
+  return (
+    <div className={styles.coursesContainer}>
+      <h1 className={styles.title}>Your Courses</h1>
+      <div className={styles.masonryLayout}>
+        {courses.map((course, index) => (
+          <CourseTile key={index} {...course} onClick={() => handleCourseClick(course)} />
         ))}
       </div>
-    );
-  }
-  
-  export default Courses;
+    </div>
+  );
+}
 
+export default Courses;
