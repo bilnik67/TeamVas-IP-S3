@@ -23,8 +23,8 @@ jobs:
       working-directory: Backend/TeamVas
       
   build_frontend:
-    runs-on: ubuntu-latest
-    steps:
+  runs-on: ubuntu-latest
+  steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
       with:
@@ -36,8 +36,10 @@ jobs:
     - name: Install Dependencies
       run: npm install
       working-directory: ./Frontend/TeamVas
-    - name: Install Vite 
-      run: | 
+    - name: Clear npm cache
+      run: npm cache clean -f
+    - name: Install Vite
+      run: |
         npm install -g create-vite
         npm update vite
     - name: Build Frontend
