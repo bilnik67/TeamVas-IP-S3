@@ -23,28 +23,28 @@ jobs:
       working-directory: Backend/TeamVas
       
   build_frontend:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Setup Node
-      uses: actions/setup-node@v1
-      with:
-        node-version: 16
-    - name: Install Dependencies
-      run: npm install
-      working-directory: ./Frontend/TeamVas
-    - name: Clear npm cache
-      run: npm cache clean -f
-    - name: Install Vite
-      run: |
-        npm install -g create-vite
-        npm update vite
-    - name: Build Frontend
-      run: npm run build
-      working-directory: ./Frontend/TeamVas
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./Frontend/TeamVas
+      - name: Clear npm cache
+        run: npm cache clean -f
+      - name: Install Vite
+        run: |
+          npm install -g create-vite
+          npm update vite
+      - name: Build Frontend
+        run: npm run build
+        working-directory: ./Frontend/TeamVas
 
   test_frontend:
     needs: build_frontend
