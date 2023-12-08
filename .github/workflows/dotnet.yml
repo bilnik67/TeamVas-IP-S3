@@ -30,6 +30,14 @@ jobs:
     - name: Test
       run: dotnet test Backend/TeamVas/TeamVas.Tests/TeamVas.Tests.csproj
 
+  IntegrationTests_dotnet:
+    needs: build_dotnet
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: InteGration Test
+      run: dotnet test Backend/TeamVas/TeamVas.IntegrationTests.TeamVas.IntegrationTests.csproj
+
   sonarqube-analysis-backend:
     needs: unittest_dotnet
     runs-on: ubuntu-latest
