@@ -86,6 +86,11 @@ namespace TeamVas.IntegrationTests.Courses
         {
             // Act
             var course = _repository.GetCourseById(-1);
+            _context.Course.Add(course);
+            _context.SaveChanges();
+
+            // Assert (should throw exception)
+            _repository.UpdateCourse(course);
 
         }
 
