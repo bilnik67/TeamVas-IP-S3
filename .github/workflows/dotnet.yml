@@ -25,6 +25,7 @@ jobs:
   build_frontend:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
     - name: Build Frontend
       run: 
         npm run build
