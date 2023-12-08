@@ -96,7 +96,9 @@ jobs:
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
   build_and_push_docker:
-    needs: [sonarqube-analysis-backend, sonarqube-analysis-frontend]
+    needs: 
+    - sonarqube-analysis-backend
+    - sonarqube-analysis-frontend
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2 
