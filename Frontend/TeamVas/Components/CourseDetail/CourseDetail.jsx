@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './CourseDetail.module.css';
+import { fetchCourseDetails } from '../../Repository/CourseRepository.jsx';
 
 const CourseDetail = () => {
   const { courseId } = useParams();
@@ -8,17 +9,13 @@ const CourseDetail = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch(`https://localhost:7232/Courses/${courseId}`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+        try {
+          const courseData = await fetchCourseDetails(courseId);
+          setCourse(courseData);
+        } catch (error) {
+          console.error(`Error fetching course details for course ${courseId}:`, error);
         }
-        const data = await response.json();
-        setCourse(data);
-      } catch (error) {
-        console.error("There was a problem fetching course data:", error);
-      }
-    };
+      };
 
     fetchData();
   }, [courseId]); 

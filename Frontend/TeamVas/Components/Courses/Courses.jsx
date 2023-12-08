@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Courses.module.css';
+import { fetchCourses } from '../../Repository/CourseRepository.jsx';
 
 const CourseTile = ({ name, onClick }) => (
   <div className={styles.courseCard}>
@@ -18,14 +19,10 @@ const Courses = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://localhost:7232/Courses');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setCourses(data);
+        const coursesData = await fetchCourses();
+        setCourses(coursesData);
       } catch (error) {
-        console.error("There was a problem fetching course data:", error);
+        console.error("Error fetching courses:", error);
       }
     };
 
