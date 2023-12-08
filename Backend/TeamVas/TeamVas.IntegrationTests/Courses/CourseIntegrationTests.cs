@@ -81,6 +81,15 @@ namespace TeamVas.IntegrationTests.Courses
         }
 
         [TestMethod]
+        [ExpectedException(typeof(CourseNotFoundException))]
+        public void UpdateCourse_ShouldThrowException_WhenCourseDoesNotExist()
+        {
+            // Act
+            var course = _repository.GetCourseById(-1);
+
+        }
+
+        [TestMethod]
         public void AddCourse_ShouldAddCourse()
         {
             // Arrange
