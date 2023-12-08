@@ -44,7 +44,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: InteGration Test
-      run: dotnet test Backend/TeamVas/TeamVas.IntegrationTests.TeamVas.IntegrationTests.csproj
+      run: dotnet test Backend/TeamVas/TeamVas.IntegrationTests/TeamVas.IntegrationTests.csproj
 
   sonarqube-analysis-backend:
     needs:
