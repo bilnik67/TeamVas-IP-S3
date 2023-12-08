@@ -31,6 +31,25 @@ jobs:
         npm run build
       working-directory: ./Frontend/TeamVas
 
+  test_frontend:
+    needs: build_frontend
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 16
+    - name: Install Dependencies
+      run: npm install
+      working-directory: ./Frontend/TeamVas
+    - name: Run Frontend Tests
+      run: npm test
+      working-directory: ./Frontend/TeamVas
+
   UnitTest_dotnet:
     needs: build_dotnet
     runs-on: ubuntu-latest
