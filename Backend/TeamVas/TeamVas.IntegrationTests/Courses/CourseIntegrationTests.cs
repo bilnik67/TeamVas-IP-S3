@@ -10,6 +10,7 @@ using TeamVas.DAL.Repositories;
 using TeamVas.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory;
+using Exceptions.Courses;
 
 namespace TeamVas.IntegrationTests.Courses
 {
@@ -71,7 +72,7 @@ namespace TeamVas.IntegrationTests.Courses
         }
 
         [TestMethod]
-        [ExpectedException(typeof(KeyNotFoundException))]
+        [ExpectedException(typeof(CourseNotFoundException))]
         public void GetCourseById_ShouldThrowException_WhenCourseDoesNotExist()
         {
             // Act
