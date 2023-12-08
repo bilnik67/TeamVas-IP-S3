@@ -77,7 +77,6 @@ namespace TeamVas.IntegrationTests.Courses
             // Act
             var course = _repository.GetCourseById(-1);
 
-            // Assert is handled by ExpectedException
         }
 
         [TestMethod]
@@ -94,6 +93,40 @@ namespace TeamVas.IntegrationTests.Courses
             Assert.IsNotNull(addedCourse);
             Assert.AreEqual(course.Name, addedCourse.Name);
             Assert.AreEqual(course.Description, addedCourse.Description);
+        }
+        [TestMethod]
+        public void UpdateCourse_ShouldUpdateCourse_WhenCourseExists()
+        {
+            // Arrange
+            var originalCourse = new Course(4,"Original Course","Original Description");
+            _context.Course.Add(originalCourse);
+            _context.SaveChanges();
+
+            var updatedCourse = new Course (4, "Updated Course", "Updated Description");
+
+            // Act
+            _repository.UpdateCourse(updatedCourse);
+            var result = _context.Course.Find(originalCourse.Id);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(updatedCourse.Name, result.Name);
+            Assert.AreEqual(updatedCourse.Description, result.Description);
+        }
+        [TestMethod]
+        public void DeleteCourse_ShouldRemoveCourse_WhenCourseExists()
+        {
+            // Arrange
+            var course = new Course(5, "Course to Delete", "Description for deletion");
+            _context.Course.Add(course);
+            _context.SaveChanges();
+
+            // Act
+            _repository.DeleteCourse(course.Id);
+            var deletedCourse = _context.Course.Find(course.Id);
+
+            // Assert
+            Assert.IsNull(deletedCourse);
         }
 
         [TestCleanup]

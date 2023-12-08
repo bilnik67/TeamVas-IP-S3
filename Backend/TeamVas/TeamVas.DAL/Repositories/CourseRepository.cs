@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TeamVas.DAL.Entities;
+using Exceptions.Courses;
 
 namespace TeamVas.DAL.Repositories
 {
@@ -36,7 +37,7 @@ namespace TeamVas.DAL.Repositories
 
             if (course == null)
             {
-                throw new KeyNotFoundException($"A course with ID {courseId} was not found.");
+                throw new CourseNotFoundException($"A course with ID {courseId} was not found.");
             }
 
             return course;
@@ -51,7 +52,16 @@ namespace TeamVas.DAL.Repositories
 
         public void UpdateCourse(Course course)
         {
-            _context.Entry(course).State = EntityState.Modified;
+            var existingCourse = _context.Course.Find(course.Id);
+            if (existingCourse != null)
+            {
+                _context.Entry(existingCourse).CurrentValues.SetValues(course);
+            }
+            else
+            {
+                throw new CourseNotFoundException($"Course with ID {course.Id} not found.");
+            }
+
             _context.SaveChanges();
         }
 
