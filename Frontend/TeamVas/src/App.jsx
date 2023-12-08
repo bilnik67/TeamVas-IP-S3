@@ -7,6 +7,7 @@
   import Homepage from '../Components/HomePage/HomePage.jsx';
   import Courses from '../Components/Courses/Courses.jsx';
   import Layout from '../Components/Layout/Layout.jsx'
+  import CourseDetail from '../Components/CourseDetail/CourseDetail.jsx'
 
   function App() {
 
@@ -15,6 +16,7 @@
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/courses" element={<Courses />} />
+          <Route path="/course/:courseId" element={<CourseDetail />} />
         </Routes>
       </Layout>
 

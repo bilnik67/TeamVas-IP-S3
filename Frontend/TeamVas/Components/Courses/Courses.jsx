@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './Courses.module.css';
 
 const CourseTile = ({ name, onClick }) => (
@@ -12,6 +13,7 @@ const CourseTile = ({ name, onClick }) => (
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,6 +34,7 @@ const Courses = () => {
 
   const handleCourseClick = (course) => {
     console.log(`Course clicked: ${course.name}`);
+    navigate(`/course/${course.id}`);
   };
 
   return (
