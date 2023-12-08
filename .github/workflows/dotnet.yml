@@ -38,8 +38,8 @@ jobs:
       working-directory: ./Frontend/TeamVas
     - name: Install Vite 
       run: | 
-        - npm install -g create-vite
-        - npm update vite
+        npm install -g create-vite
+        npm update vite
     - name: Build Frontend
       run: npm run build
       working-directory: ./Frontend/TeamVas
