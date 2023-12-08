@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Install Dependencies
         run: npm install
-        working-directory: ./frontend/teamvas
+        working-directory: ./Frontend/teamvas
       - name: Clear npm cache
         run: npm cache clean -f
       - name: Install Vite
