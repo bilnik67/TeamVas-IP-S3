@@ -25,9 +25,6 @@ jobs:
   build_frontend:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Dependencies
-        run: npm install
-        working-directory: ./Frontend/teamvas
       - name: Clear npm cache
         run: npm cache clean -f
       - name: Install Vite
