@@ -21,8 +21,16 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
       working-directory: Backend/TeamVas
+      
+  build_frontend:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build Frontend
+      run: 
+        npm run build
+      working-directory: ./Frontend/TeamVas
 
-  unittest_dotnet:
+  UnitTest_dotnet:
     needs: build_dotnet
     runs-on: ubuntu-latest
     steps:
@@ -39,7 +47,9 @@ jobs:
       run: dotnet test Backend/TeamVas/TeamVas.IntegrationTests.TeamVas.IntegrationTests.csproj
 
   sonarqube-analysis-backend:
-    needs: unittest_dotnet
+    needs:
+      - UnitTest_dotnet
+      - IntegrationTests_dotnet
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repository
@@ -61,7 +71,7 @@ jobs:
         dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_BACKEND }}"
 
   sonarqube-analysis-frontend:
-    needs: unittest_dotnet
+    needs: build_frontend
     runs-on: ubuntu-latest
     permissions: read-all
     steps:
