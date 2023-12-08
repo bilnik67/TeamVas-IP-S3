@@ -36,8 +36,10 @@ jobs:
     - name: Install Dependencies
       run: npm install
       working-directory: ./Frontend/TeamVas
-    - name: Install Vite (if not already installed)
-      run: npm install -g create-vite
+    - name: Install Vite 
+      run: | 
+        - npm install -g create-vite
+        - npm update vite
     - name: Build Frontend
       run: npm run build
       working-directory: ./Frontend/TeamVas
