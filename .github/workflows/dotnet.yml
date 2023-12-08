@@ -91,7 +91,7 @@ jobs:
         dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_BACKEND }}"
 
   sonarqube-analysis-frontend:
-    needs: build_frontend
+    needs: test_frontend
     runs-on: ubuntu-latest
     permissions: read-all
     steps:
