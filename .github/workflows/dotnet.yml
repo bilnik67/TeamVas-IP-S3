@@ -21,8 +21,43 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
       working-directory: Backend/TeamVas
+      
+  build_frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./Frontend/TeamVas
+      - name: Clear npm cache
+        run: npm cache clean -f
+      - name: Install Vite
+        run: |
+          npm install -g create-vite
+          npm update vite
+      - name: Build Frontend
+        run: npm run build
+        working-directory: ./Frontend/TeamVas
 
-  unittest_dotnet:
+  test_frontend:
+    needs: build_frontend
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 16
+    - name: Install Dependencies
+      run: npm install
+      working-directory: ./Frontend/TeamVas
+    - name: Run Frontend Tests
+      run: npm test
+      working-directory: ./Frontend/TeamVas
+
+  UnitTest_dotnet:
     needs: build_dotnet
     runs-on: ubuntu-latest
     steps:
@@ -30,8 +65,18 @@ jobs:
     - name: Test
       run: dotnet test Backend/TeamVas/TeamVas.Tests/TeamVas.Tests.csproj
 
+  IntegrationTests_dotnet:
+    needs: build_dotnet
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: InteGration Test
+      run: dotnet test Backend/TeamVas/TeamVas.IntegrationTests/TeamVas.IntegrationTests.csproj
+
   sonarqube-analysis-backend:
-    needs: unittest_dotnet
+    needs:
+      - UnitTest_dotnet
+      - IntegrationTests_dotnet
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repository
@@ -53,7 +98,7 @@ jobs:
         dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN_BACKEND }}"
 
   sonarqube-analysis-frontend:
-    needs: unittest_dotnet
+    needs: test_frontend
     runs-on: ubuntu-latest
     permissions: read-all
     steps:
@@ -78,7 +123,9 @@ jobs:
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
   build_and_push_docker:
-    needs: [sonarqube-analysis-backend, sonarqube-analysis-frontend]
+    needs: 
+    - sonarqube-analysis-backend
+    - sonarqube-analysis-frontend
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2 
