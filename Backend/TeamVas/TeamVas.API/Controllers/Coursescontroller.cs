@@ -7,11 +7,11 @@ namespace TeamVas.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class Coursescontroller : ControllerBase
+    public class CoursesController : ControllerBase
     {
         private readonly ICourseService _courseService;
 
-        public Coursescontroller(ICourseService courseService)
+        public CoursesController(ICourseService courseService)
         {
             _courseService = courseService;
         }

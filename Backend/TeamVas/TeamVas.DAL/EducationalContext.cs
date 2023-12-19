@@ -10,6 +10,8 @@ namespace TeamVas.DAL
 {
     public class EducationalContext : DbContext
     {
+
+        public DbSet<Course> Courses { get; set; }
         public EducationalContext(DbContextOptions<EducationalContext> options)
             : base(options)
         {
