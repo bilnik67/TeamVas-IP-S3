@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using TeamVas.API.DTOs;
 using TeamVas.BLogic.Models;
 using TeamVas.BLogic.Services;
@@ -24,12 +25,19 @@ namespace TeamVas.API.Controllers
         [HttpGet("{id}")]
         public ActionResult<CourseDto> GetCourse(int id)
         {
-            var course = _courseService.GetCourseById(id);
-            if (course == null)
+            try
             {
-                return NotFound();
+                var course = _courseService.GetCourseById(id);
+                if (course == null)
+                {
+                    return NotFound();
+                }
+                return Ok(course);
             }
-            return Ok(course);
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while processing the request." });
+            }
         }
     }
 }
