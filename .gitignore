@@ -726,3 +726,4 @@ $RECYCLE.BIN/
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,csharp,windows,aspnetcore
+/Backend/TeamVas/TeamVas.IntegrationTests/TestEducationalDBContext.cs
