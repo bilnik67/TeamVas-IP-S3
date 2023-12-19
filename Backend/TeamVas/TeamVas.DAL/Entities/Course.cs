@@ -12,6 +12,13 @@ namespace TeamVas.DAL.Entities
         public string Name { get; private set; } = string.Empty;
         public string Description { get; private set; } = string.Empty;
 
+        public void SetCourseModel(int id, string name, string description)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Description = description;
+        }
+
         public Course(int id, string name, string description)
         {
             Id = id;
