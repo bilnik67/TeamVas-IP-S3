@@ -1,11 +1,13 @@
 import React from 'react';
 import styles from './NavBar.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faBriefcase } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faBriefcase, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import Teamvaslogo from '../../public/Images/TeamVasLogo.png';
+import { useKeycloak } from '@react-keycloak/web';
 
 const NavBar = () => {
+  const { keycloak } = useKeycloak();
     return (
       <nav className={styles.navbar}>
         <Link to="/">
@@ -19,6 +21,21 @@ const NavBar = () => {
             <FontAwesomeIcon icon={faBriefcase} className={styles.navIcon} />
             <span>Portfolio</span>
         </Link>
+        <div className={styles.userSection}>
+          <button>
+            <div onClick={() => keycloak.logout()}>
+              logout
+            </div>
+          </button>
+          <button>
+            <div onClick={() => keycloak.login()}>
+              login
+            </div>
+          </button>
+
+          <FontAwesomeIcon icon={faUserCircle} className={styles.userIcon} />
+          <span className={styles.userName}>{keycloak.subject}</span>
+        </div>
       </nav>
     );
 };
