@@ -34,7 +34,9 @@ const NavBar = () => {
           </button>
 
           <FontAwesomeIcon icon={faUserCircle} className={styles.userIcon} />
-          <span className={styles.userName}>{keycloak.subject}</span>
+          <span className={styles.userName} onClick={() => keycloak.accountManagement()}>
+            {keycloak.tokenParsed?.preferred_username ?? 'Unknown User'}
+          </span>
         </div>
       </nav>
     );

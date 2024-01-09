@@ -1,0 +1,42 @@
+body{
+  margin: 0;
+}
+
+.navbar {
+  background-color: lightgreen;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%; 
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  z-index: 1000; 
+}
+
+.nav-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-item {
+  margin: 0 10px;
+}
+
+.nav-button {
+  text-decoration: none;
+  color: white; 
+  font-weight: bold;
+  background-color: transparent; 
+  border: none;
+  cursor: pointer;
+  padding: 12px 20px; 
+  border-radius: 20px;
+}
+
+.nav-button:hover {
+  background-color: white; 
+  color: black; 
+}
