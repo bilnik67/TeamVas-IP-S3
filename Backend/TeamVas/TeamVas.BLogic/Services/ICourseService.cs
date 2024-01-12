@@ -11,5 +11,8 @@ namespace TeamVas.BLogic.Services
     {
         IEnumerable<CourseModel> GetAllCourses();
         CourseModel GetCourseById(int courseId);
+        CourseModel AddCourse(CourseModel courseModel);
+        void UpdateCourse(CourseModel courseModel);
+        void DeleteCourse(int courseId);
     }
 }

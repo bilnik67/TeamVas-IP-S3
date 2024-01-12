@@ -22,6 +22,12 @@ namespace TeamVas.BLogic.Services
         public IEnumerable<CourseModel> GetAllCourses()
         {
             var courses =  _courseRepository.GetAllCourses();
+
+            if (courses == null)
+            {
+                throw new InvalidOperationException("No courses available.");
+            }
+
             return courses.Select(c => new CourseModel(c.Id, c.Name, c.Description)).ToList();
         }
 
@@ -29,8 +35,14 @@ namespace TeamVas.BLogic.Services
         {
             var course = _courseRepository.GetCourseById(courseId);
 
+            if (course == null)
+            {
+                return null;
+            }
+
             return new CourseModel(course.Id, course.Name, course.Description);
         }
+
         public CourseModel AddCourse(CourseModel courseModel)
         {
             var course = new Course(courseModel.Id ,courseModel.Name, courseModel.Description);
@@ -49,6 +61,7 @@ namespace TeamVas.BLogic.Services
                 existingCourse.SetCourseModel(courseModel.Id, courseModel.Name, courseModel.Description);
 
                 _courseRepository.UpdateCourse(existingCourse);
+
             }
             else
             {

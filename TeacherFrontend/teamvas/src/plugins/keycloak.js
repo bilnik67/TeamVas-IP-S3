@@ -18,11 +18,12 @@ export default {
       .then((auth) => {
         if (!auth) {
           window.location.reload();
-        } else {
-          app.config.globalProperties.$keycloak.hasRealmRole = (Teacher) => {
-            return keycloak.hasResourceRole(Teacher) || keycloak.hasRealmRole(Teacher);
-          };
-        }
+        } 
+        // else {
+        //   app.config.globalProperties.$keycloak.hasRealmRole = (Teacher) => {
+        //     return keycloak.hasResourceRole(Teacher) || keycloak.hasRealmRole(Teacher);
+        //   };
+        // }
       })
       .catch((err) => {
         console.error('Authenticated Failed:', err);

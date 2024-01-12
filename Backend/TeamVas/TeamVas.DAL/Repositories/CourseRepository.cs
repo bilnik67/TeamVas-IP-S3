@@ -24,7 +24,7 @@ namespace TeamVas.DAL.Repositories
 
             if (!courses.Any()) 
             {
-                throw new InvalidOperationException("No courses available.");
+                throw new CourseNotFoundException("No courses available.");
             }
 
             return courses;
@@ -34,11 +34,6 @@ namespace TeamVas.DAL.Repositories
         {
             var course = _context.Course
                 .FirstOrDefault(c => c.Id == courseId);
-
-            if (course == null)
-            {
-                throw new CourseNotFoundException($"A course with ID {courseId} was not found.");
-            }
 
             return course;
         }

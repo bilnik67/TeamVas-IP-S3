@@ -1,39 +1,15 @@
-
-
 <template>
   <div class="hello">
-    <div v-if="hasTeacherRole">
-      <h1>Hey Teacher,</h1>
-      <p>Welcome back, teacher!</p>
-      <button @click="logout" class="auth-button">Sign out</button>
-    </div>
-    <div v-else>
-      <p>You do not have permission to view this page.</p>
-      <p>If you are a teacher, please logout and login with a teacher account:</p>
-      <button @click="logout" class="auth-button">Sign out</button>
-    </div>
+    <h1>Hey Teacher,</h1>
+    <p>Welcome back, teacher!</p>
+    <button @click="logout" class="auth-button">Sign out</button>
   </div>
 </template>
-
-
 
 <script>
 
 export default {
   name: 'HelloWorld',
-  data() {
-    return {
-      authenticated: false, // Initialize authenticated as false
-    };
-  },
-  computed: {
-    keycloak() {
-      return this.$keycloak;
-    },
-    hasTeacherRole() {
-      return this.authenticated && this.keycloak.hasRealmRole('Teacher');
-    }
-  },
   methods: {
     login() {
       this.keycloak.login();
@@ -42,17 +18,6 @@ export default {
       this.keycloak.logout();
     }
   },
-  created() {
-    this.keycloak.onReady = (authenticated) => {
-      this.authenticated = authenticated;
-    };
-    this.keycloak.onAuthSuccess = () => {
-      this.authenticated = true;
-    };
-    this.keycloak.onAuthLogout = () => {
-      this.authenticated = false;
-    };
-  }
 };
 </script>
 
