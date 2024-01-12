@@ -31,15 +31,15 @@ namespace TeamVas.API.Controllers
             try
             {
                 var course = _courseService.GetCourseById(id);
-                if (course == null)
-                {
-                    return NotFound();
-                }
                 return Ok(course);
+            }
+            catch (CourseNotFoundException cex)
+            {
+                return NotFound();
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "An error occurred while processing the request." });
+                return StatusCode(500, new { message = "An error occurred while processing the request.", ex });
             }
         }
         [HttpPost]
@@ -100,7 +100,7 @@ namespace TeamVas.API.Controllers
                 return StatusCode(500, new { message = "An error occurred while deleting the course." });
             }
         }
-        private CourseModel ConvertToCourseModel(CourseDto courseDto)
+        private static CourseModel ConvertToCourseModel(CourseDto courseDto)
         {
             return new CourseModel(courseDto.Id, courseDto.Name, courseDto.Description);
         }

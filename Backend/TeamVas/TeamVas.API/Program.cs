@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using Castle.Core.Configuration;
+using TeamVas.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,10 +25,10 @@ var allowedOrigins = configuration.GetSection("Cors:AllowedOrigins").Get<string[
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowWebApp",
-        builder => builder.WithOrigins(allowedOrigins)
+        builder => builder.WithOrigins(allowedOrigins ?? new string[0])
             .AllowAnyMethod()
             .AllowAnyHeader()
-            .AllowCredentials()); 
+            .AllowCredentials());
 });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

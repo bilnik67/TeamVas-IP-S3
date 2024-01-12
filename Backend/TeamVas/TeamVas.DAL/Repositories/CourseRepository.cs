@@ -32,8 +32,12 @@ namespace TeamVas.DAL.Repositories
 
         public Course GetCourseById(int courseId)
         {
-            var course = _context.Course
-                .FirstOrDefault(c => c.Id == courseId);
+            var course = _context.Course.FirstOrDefault(c => c.Id == courseId);
+
+            if (course == null)
+            {
+                throw new CourseNotFoundException($"Course with ID {courseId} not found.");
+            }
 
             return course;
         }

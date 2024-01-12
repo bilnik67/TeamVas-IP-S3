@@ -18,6 +18,13 @@ namespace teamvas.Tests.Unit_Tests
         private Mock<ICourseRepository> _mockRepo;
         private CourseService _courseService;
 
+        public CourseServiceTests()
+        {
+            _mockRepo = new Mock<ICourseRepository>();
+            _courseService = new CourseService(_mockRepo.Object);
+        }
+        
+
         [TestInitialize]
         public void Setup()
         {
@@ -102,7 +109,7 @@ namespace teamvas.Tests.Unit_Tests
             // Arrange
             var courseModel = new CourseModel(3, "Updated Course", "Updated Description");
             _mockRepo.Setup(repo => repo.GetCourseById(3))
-                .Returns((Course)null);
+                     .Returns((Course)null!);
 
             // Act and Assert
             _courseService.UpdateCourse(courseModel);

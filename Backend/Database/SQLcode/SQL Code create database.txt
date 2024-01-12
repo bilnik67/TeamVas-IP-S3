@@ -1,0 +1,89 @@
+CREATE TABLE User (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE Teacher (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    UserID INT,
+    FOREIGN KEY (UserID) REFERENCES User(ID)
+);
+
+CREATE TABLE Student (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    UserID INT,
+    FOREIGN KEY (UserID) REFERENCES User(ID)
+);
+
+CREATE TABLE Course (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(255) NOT NULL,
+    Description TEXT,
+    Teacher_ID INT,
+    FOREIGN KEY (Teacher_ID) REFERENCES Teacher(ID)
+);
+
+CREATE TABLE Assignment (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Title VARCHAR(255) NOT NULL,
+    Description TEXT,
+    Teacher_ID INT,
+    FOREIGN KEY (Teacher_ID) REFERENCES Teacher(ID)
+);
+
+CREATE TABLE Portfolio (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Title VARCHAR(255) NOT NULL,
+    Content TEXT,
+    Student_ID INT,
+    FOREIGN KEY (Student_ID) REFERENCES Student(ID)
+);
+
+CREATE TABLE `Group` (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(255) NOT NULL,
+    Description TEXT
+);
+
+CREATE TABLE PrivateMessage (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Content TEXT NOT NULL,
+    SenderID INT,
+    ReceiverID INT,
+    FOREIGN KEY (SenderID) REFERENCES User(ID),
+    FOREIGN KEY (ReceiverID) REFERENCES User(ID)
+);
+
+CREATE TABLE GroupMessage (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Content TEXT NOT NULL,
+    Group_ID INT,
+    User_ID INT,
+    FOREIGN KEY (Group_ID) REFERENCES `Group`(ID),
+    FOREIGN KEY (User_ID) REFERENCES User(ID)
+);
+
+CREATE TABLE User_Course (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    User_ID INT,
+    Course_ID INT,
+    FOREIGN KEY (User_ID) REFERENCES User(ID),
+    FOREIGN KEY (Course_ID) REFERENCES Course(ID)
+);
+
+CREATE TABLE User_Group (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    User_ID INT,
+    Group_ID INT,
+    FOREIGN KEY (User_ID) REFERENCES User(ID),
+    FOREIGN KEY (Group_ID) REFERENCES `Group`(ID)
+);
+
+CREATE TABLE Student_Assignment (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Student_ID INT,
+    Assignment_ID INT,
+    FOREIGN KEY (Student_ID) REFERENCES Student(ID),
+    FOREIGN KEY (Assignment_ID) REFERENCES Assignment(ID)
+);

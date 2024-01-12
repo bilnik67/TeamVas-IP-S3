@@ -37,7 +37,7 @@ namespace TeamVas.BLogic.Services
 
             if (course == null)
             {
-                return null;
+                throw new CourseNotFoundException($"Course with ID {courseId} not found.");
             }
 
             return new CourseModel(course.Id, course.Name, course.Description);

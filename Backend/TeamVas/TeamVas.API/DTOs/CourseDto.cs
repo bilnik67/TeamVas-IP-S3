@@ -3,8 +3,8 @@
     public class CourseDto
     {
         public int Id { get; set; }
-        public string Name { get; set; } 
-        public string Description { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; } 
 
         public CourseDto(int id, string name, string description)
         {
@@ -13,6 +13,10 @@
             Description = description;
             
         }
-        public CourseDto() { }
+        public CourseDto() 
+        {
+            Name = "";
+            Description = "";
+        }
     }
 }
