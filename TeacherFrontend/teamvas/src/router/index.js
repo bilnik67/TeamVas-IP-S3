@@ -3,6 +3,8 @@ import HelloWorld from '../components/HelloWorld.vue'
 import NotFound from '../components/Notfound/Notfound.vue'; 
 import Courses from '../components/Courses/Courses.vue';
 import NoAccess from '../components/NoAccess/NoAccess.vue';
+import Addcourse from '../components/Courses/AddCourse.vue';
+import EditCourse from '../components/Courses/EditCourse.vue';
 import { app } from '../main.js';
 
 const routes = [
@@ -10,8 +12,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: HelloWorld,
-    meta: { requiresAuth: true }
-
   },
   {
     path: '/no-access',
@@ -23,6 +23,18 @@ const routes = [
     path: '/courses',
     name: 'Courses',
     component: Courses,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/add-course',
+    name: 'AddCourse',
+    component: Addcourse,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/edit-course/:courseId',
+    name: 'EditCourse',
+    component: EditCourse,
     meta: { requiresAuth: true }
   },
   {

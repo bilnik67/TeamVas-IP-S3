@@ -1,4 +1,5 @@
 ﻿using Exceptions.Courses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using TeamVas.API.DTOs;
@@ -42,6 +43,7 @@ namespace TeamVas.API.Controllers
             }
         }
         [HttpPost]
+        //[Authorize(Roles = "Teacher")]
         public ActionResult<CourseDto> AddCourse([FromBody] CourseDto courseDto)
         {
             try
@@ -58,6 +60,7 @@ namespace TeamVas.API.Controllers
         }
 
         [HttpPut("{id}")]
+        //[Authorize(Roles = "Teacher")]
         public ActionResult UpdateCourse([FromBody] CourseDto courseDto)
         {
             try
@@ -78,6 +81,7 @@ namespace TeamVas.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        //[Authorize(Roles = "Teacher")]
         public ActionResult DeleteCourse(int id)
         {
             try

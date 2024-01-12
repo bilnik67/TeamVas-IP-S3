@@ -12,10 +12,10 @@ export default {
   name: 'HelloWorld',
   methods: {
     login() {
-      this.keycloak.login();
+      this.$keycloak.login();
     },
     logout() {
-      this.keycloak.logout();
+      this.$keycloak.logout();
     }
   },
 };

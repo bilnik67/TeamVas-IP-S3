@@ -1,39 +1,61 @@
 
-
 <template>
     <div class="courses-container">
       <h1>All Courses</h1>
       <ul class="courses-list">
         <li v-for="course in courses" :key="course.id" class="course-item">
           {{ course.name }}
-          <button @click="editCourse(course)" class="edit-course-btn">Edit</button>
+          <router-link :to="'/edit-course/' + course.id" class="edit-course-link edit-course-btn">Edit</router-link>
           <button @click="deleteCourse(course.id)" class="delete-course-btn">Delete</button>
         </li>
       </ul>
-      <button @click="addCourse" class="add-course-btn">Add Course</button>
+      <router-link to="/add-course" class="add-course-btn">Add New Course</router-link>
     </div>  
   </template>
   
   <script>
+  import CourseRepository from '../../Repository/CourseRepository';
+  import { useToast } from "vue-toastification";
+
   export default {
     name: 'CoursesPage',
     data() {
-      return {
-        courses: [
-          { id: 1, name: 'Introduction to Vue.js' },
-          { id: 2, name: 'Component Composition' },
-          { id: 3, name: 'Vue Router for Single Page Applications' },
-          { id: 4, name: 'State Management with Vuex' },
-          { id: 5, name: 'Building Performant Vue Apps' },
-          { id: 6, name: 'Testing Vue Components' }
-        ]
-      }
+    return {
+      courses: []
+    };
+  },
+  created() {
+    this.fetchCourses();
+  },
+  methods: {
+    async fetchCourses() {
+        this.courses = await CourseRepository.getAllCourses();
     },
-    methods: {
-      addCourse() {
-        alert('Add course functionality to be implemented');
-      }
-    }
+    async deleteCourse(courseId) {
+      const toast = useToast();  
+
+      this.$swal({
+        title: 'Are you sure?',
+        text: 'You will not be able to recover this course!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            await CourseRepository.deleteCourse(courseId);
+            this.fetchCourses();  
+            toast.success("Course deleted successfully.");  
+          } catch (error) {
+            console.error('There was an error deleting the course:', error);
+            toast.error("Failed to delete the course.");  
+          }
+        }
+      });
+    },
+  }
   }
   </script>
 

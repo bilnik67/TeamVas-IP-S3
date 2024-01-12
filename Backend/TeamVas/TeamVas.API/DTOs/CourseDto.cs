@@ -2,9 +2,9 @@
 {
     public class CourseDto
     {
-        public int Id { get; private set; }
-        public string Name { get; private set; } = string.Empty;
-        public string Description { get; private set; } = string.Empty;
+        public int Id { get; set; }
+        public string Name { get; set; } 
+        public string Description { get; set; }
 
         public CourseDto(int id, string name, string description)
         {
@@ -13,5 +13,6 @@
             Description = description;
             
         }
+        public CourseDto() { }
     }
 }

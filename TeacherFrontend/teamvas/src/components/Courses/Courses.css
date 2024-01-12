@@ -24,7 +24,7 @@
 }
 
 .add-course-btn {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -53,13 +53,13 @@ h1 {
   }
   
   .edit-course-btn {
-    background-color: #f0ad4e; /* Bootstrap 'btn-warning' color */
+    background-color: #f0ad4e; 
     border: none;
     color: white;
   }
   
   .delete-course-btn {
-    background-color: #d9534f; /* Bootstrap 'btn-danger' color */
+    background-color: #d9534f; 
     border: none;
     color: white;
   }
@@ -70,4 +70,59 @@ h1 {
   
   .delete-course-btn:hover {
     background-color: #c9302c;
+  }
+  .add-course-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .page-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .add-course-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-label {
+    font-size: 16px;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box; 
+  }
+  
+  textarea.form-input {
+    resize: vertical; 
+    box-sizing: border-box  ;
+  }
+  
+  .submit-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+
+  .edit-course-link {
+    text-decoration: none;
+    color: white;
+    cursor: pointer; 
   }

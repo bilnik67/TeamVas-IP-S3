@@ -12,6 +12,7 @@ using TeamVas.DAL.Entities;
 using System.Net;
 using TeamVas.API.DTOs;
 using TeamVas.BLogic.Models;
+using System.Net.Http.Json;
 
 namespace TeamVas.IntegrationTest.Courses
 {
@@ -99,21 +100,16 @@ namespace TeamVas.IntegrationTest.Courses
         public async Task AddCourse_ShouldReturnCreated_WhenCourseIsValid()
         {
             // Arrange
-            var newCourse = new CourseDto(3,"New Course", "New Course Description");
-            var json = JsonSerializer.Serialize(newCourse);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var newCourse = new CourseDto(3, "newcCourse", "New Course Description");
 
             // Act
-            var response = await _client.PostAsync("/courses", content);
-            response.EnsureSuccessStatusCode();
-            var stringResponse = await response.Content.ReadAsStringAsync();
-
-            Console.WriteLine($"Response Content: {stringResponse}");  
+            var response = await _client.PostAsJsonAsync("/courses", newCourse);
+            var createdCourse = await response.Content.ReadFromJsonAsync<CourseDto>();
 
             // Assert
-            var createdCourse = JsonSerializer.Deserialize<Course>(stringResponse);
+            Assert.Equal(HttpStatusCode.Created, response.StatusCode);
             Assert.NotNull(createdCourse);
-            Assert.Equal("New Course", createdCourse.Name);
+            Assert.Equal("newcCourse", createdCourse?.Name);
         }
         [Fact]
         public async Task UpdateCourse_ShouldReturnNoContent_WhenCourseExists()
@@ -135,17 +131,13 @@ namespace TeamVas.IntegrationTest.Courses
         {
             // Arrange
             var existingCourseId = 1;
-            var updatedCourse = new CourseDto (1, "Updated Course", "Updated Course Description");
-            var updateContent = new StringContent(JsonSerializer.Serialize(updatedCourse), Encoding.UTF8, "application/json");
+            var updatedCourse = new CourseDto(1, "Updated Course", "Updated Course Description");
 
             // Act
-            var updateResponse = await _client.PutAsync($"/courses/{existingCourseId}", updateContent);
+            var updateResponse = await _client.PutAsJsonAsync($"/courses/{existingCourseId}", updatedCourse);
             updateResponse.EnsureSuccessStatusCode();
 
-            var getResponse = await _client.GetAsync($"/courses/{existingCourseId}");
-            getResponse.EnsureSuccessStatusCode();
-            var stringResponse = await getResponse.Content.ReadAsStringAsync();
-            var retrievedCourse = JsonSerializer.Deserialize<CourseModel>(stringResponse);
+            var retrievedCourse = await _client.GetFromJsonAsync<CourseDto>($"/courses/{existingCourseId}");
 
             // Assert
             Assert.NotNull(retrievedCourse);

@@ -19,10 +19,8 @@
         <BrowserRouter>
           <Layout>
             <Routes>
-              {/* Always visible route */}
             <Route path="/" element={<Homepage />} />
 
-            {/* Conditionally visible routes */}
               <>
                 <Route path="/courses" element={
                 <AuthenticatedRoute>
