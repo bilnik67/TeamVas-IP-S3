@@ -12,11 +12,13 @@ namespace TeamVas.DAL
     {
 
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
         public EducationalContext(DbContextOptions<EducationalContext> options)
             : base(options)
         {
         }
 
         public DbSet<Course> Course { get; set; }
+        public DbSet<Assignment> Assignment { get; set; }
     }
 }

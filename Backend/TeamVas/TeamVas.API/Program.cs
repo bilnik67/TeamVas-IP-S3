@@ -53,6 +53,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
+builder.Services.AddScoped<IAssignmentService, AssignmentService>();
 builder.Services.AddScoped<ExceptionMiddleware>();
 
 var app = builder.Build();
