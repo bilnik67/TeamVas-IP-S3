@@ -3,19 +3,19 @@
     public class AssignmentDto
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; } 
 
-        public AssignmentDto(int id, string name, string description)
+        public AssignmentDto(int id, string title, string description)
         {
             Id = id;
-            Name = name;
+            Title = title;
             Description = description;
             
         }
         public AssignmentDto() 
         {
-            Name = "";
+            Title = "";
             Description = "";
         }
     }

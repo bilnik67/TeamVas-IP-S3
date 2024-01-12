@@ -5,6 +5,8 @@ import Courses from '../components/Courses/Courses.vue';
 import NoAccess from '../components/NoAccess/NoAccess.vue';
 import Addcourse from '../components/Courses/AddCourse.vue';
 import EditCourse from '../components/Courses/EditCourse.vue';
+import Assignments from '../components/Assignments/Assignments.vue';
+import AddAssignments from '../components/Assignments/NewAssignments.vue';
 import { app } from '../main.js';
 
 const routes = [
@@ -32,6 +34,12 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: '/add-assignment',
+    name: 'AddAssignment',
+    component: AddAssignments,
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/edit-course/:courseId',
     name: 'EditCourse',
     component: EditCourse,
@@ -40,7 +48,7 @@ const routes = [
   {
     path: '/assignments',
     name: 'Assignments',
-    component: HelloWorld,
+    component: Assignments,
     meta: { requiresAuth: true }
 
   },

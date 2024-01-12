@@ -98,7 +98,7 @@ namespace teamvas.Tests.Unit_Tests
             _assignmentService.UpdateAssignment(assignmentModel);
 
             // Assert
-            Assert.AreEqual("Updated Assignment", existingAssignment.Name);
+            Assert.AreEqual("Updated Assignment", existingAssignment.Title);
             Assert.AreEqual("Updated Description", existingAssignment.Description);
         }
 

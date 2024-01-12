@@ -107,7 +107,7 @@ namespace TeamVas.IntegrationTest.Assignments
             // Assert
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
             Assert.NotNull(createdAssignment);
-            Assert.Equal("newcAssignment", createdAssignment?.Name);
+            Assert.Equal("newcAssignment", createdAssignment?.Title);
         }
         [Fact]
         public async Task UpdateAssignment_ShouldReturnNoContent_WhenAssignmentExists()
@@ -139,7 +139,7 @@ namespace TeamVas.IntegrationTest.Assignments
 
             // Assert
             Assert.NotNull(retrievedAssignment);
-            Assert.Equal("Updated Assignment", retrievedAssignment.Name);
+            Assert.Equal("Updated Assignment", retrievedAssignment.Title);
             Assert.Equal("Updated Assignment Description", retrievedAssignment.Description);
         }
 

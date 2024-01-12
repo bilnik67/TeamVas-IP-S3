@@ -10,7 +10,7 @@
           <label for="courseDescription" class="form-label">Course Description</label>
           <textarea v-model="editedCourse.description" id="courseDescription" class="form-input" placeholder="Course Description"></textarea>
         </div>
-        <button type="submit">Save Changes</button>
+        <button type="submit" class="submit-button">Save Changes</button>
       </form>
     </div>
   </template>

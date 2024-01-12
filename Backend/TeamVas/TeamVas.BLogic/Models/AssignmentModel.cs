@@ -9,14 +9,14 @@ namespace TeamVas.BLogic.Models
     public class AssignmentModel
     {
         public int Id { get; private set; }
-        public string Name { get; private set; } = string.Empty;
+        public string Title { get; private set; } = string.Empty;
         public string Description { get; private set; } = string.Empty;
 
 
-        public AssignmentModel(int id, string name, string description)
+        public AssignmentModel(int id, string title, string description)
         {
             this.Id = id;
-            this.Name = name;
+            this.Title = title;
             this.Description = description;
         }
 

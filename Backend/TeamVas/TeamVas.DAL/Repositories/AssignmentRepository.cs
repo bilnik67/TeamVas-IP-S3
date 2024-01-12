@@ -24,7 +24,7 @@ namespace TeamVas.DAL.Repositories
 
             if (!assignments.Any()) 
             {
-                throw new AssignmentNotFoundException("No courses available.");
+                return new List<Assignment>();
             }
 
             return assignments;

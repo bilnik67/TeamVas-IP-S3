@@ -28,7 +28,7 @@ namespace TeamVas.BLogic.Services
                 throw new InvalidOperationException("No assignments available.");
             }
 
-            return assignments.Select(c => new AssignmentModel(c.Id, c.Name, c.Description)).ToList();
+            return assignments.Select(c => new AssignmentModel(c.Id, c.Title, c.Description)).ToList();
         }
 
         public AssignmentModel GetAssignmentById(int assignmentId)
@@ -40,16 +40,16 @@ namespace TeamVas.BLogic.Services
                 throw new AssignmentNotFoundException($"Assignment with ID {assignmentId} not found.");
             }
 
-            return new AssignmentModel(assignment.Id, assignment.Name, assignment.Description);
+            return new AssignmentModel(assignment.Id, assignment.Title, assignment.Description);
         }
 
         public AssignmentModel AddAssignment(AssignmentModel assignmentModel)
         {
-            var assignment = new Assignment(assignmentModel.Id ,assignmentModel.Name, assignmentModel.Description);
+            var assignment = new Assignment(assignmentModel.Id ,assignmentModel.Title, assignmentModel.Description);
 
             var addedAssignment = _assignmentRepository.AddAssignment(assignment);
 
-            return new AssignmentModel(addedAssignment.Id, addedAssignment.Name, addedAssignment.Description);
+            return new AssignmentModel(addedAssignment.Id, addedAssignment.Title, addedAssignment.Description);
         }
 
         public void UpdateAssignment(AssignmentModel assignmentModel)
@@ -58,7 +58,7 @@ namespace TeamVas.BLogic.Services
 
             if (existingAssignment != null)
             {
-                existingAssignment.SetAssignmentModel(assignmentModel.Id, assignmentModel.Name, assignmentModel.Description);
+                existingAssignment.SetAssignmentModel(assignmentModel.Id, assignmentModel.Title, assignmentModel.Description);
 
                 _assignmentRepository.UpdateAssignment(existingAssignment);
 

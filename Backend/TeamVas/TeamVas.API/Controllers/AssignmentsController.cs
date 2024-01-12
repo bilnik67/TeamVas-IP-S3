@@ -102,7 +102,7 @@ namespace TeamVas.API.Controllers
         }
         private static AssignmentModel ConvertToAssignmentModel(AssignmentDto assignmentDto)
         {
-            return new AssignmentModel(assignmentDto.Id, assignmentDto.Name, assignmentDto.Description);
+            return new AssignmentModel(assignmentDto.Id, assignmentDto.Title, assignmentDto.Description);
         }
 
     }
