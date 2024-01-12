@@ -87,6 +87,31 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
+sonarqube-analysis-Teacherfrontend:
+    needs: IntegrationTests_dotnet
+    runs-on: ubuntu-latest
+    permissions: read-all
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 16
+    - name: Restore dependencies
+      run: |
+        yarn install
+      working-directory: ./TeacherFrontend/teamvas
+    - name: SonarQube Analysis
+      uses: sonarsource/sonarqube-scan-action@master
+      with:
+        projectBaseDir: ./TeacherFrontend/teamvas
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_TEACHERFRONTEND }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
   build_and_push_docker:
     needs: 
     - sonarqube-analysis-backend
