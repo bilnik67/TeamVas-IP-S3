@@ -33,7 +33,7 @@ namespace TeamVas.API.Controllers
                 var course = _courseService.GetCourseById(id);
                 return Ok(course);
             }
-            catch (CourseNotFoundException cex)
+            catch (CourseNotFoundException)
             {
                 return NotFound();
             }

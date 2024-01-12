@@ -25,7 +25,7 @@ var allowedOrigins = configuration.GetSection("Cors:AllowedOrigins").Get<string[
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowWebApp",
-        builder => builder.WithOrigins(allowedOrigins ?? new string[0])
+        builder => builder.WithOrigins(allowedOrigins ?? Array.Empty<string>())
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials());
