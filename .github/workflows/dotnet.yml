@@ -116,6 +116,7 @@ jobs:
     needs: 
     - sonarqube-analysis-backend
     - sonarqube-analysis-frontend
+    - sonarqube-analysis-teacherfrontend
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2 
