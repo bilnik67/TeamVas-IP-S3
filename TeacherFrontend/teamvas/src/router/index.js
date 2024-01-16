@@ -7,6 +7,7 @@ import Addcourse from '../components/Courses/AddCourse.vue';
 import EditCourse from '../components/Courses/EditCourse.vue';
 import Assignments from '../components/Assignments/Assignments.vue';
 import AddAssignments from '../components/Assignments/NewAssignments.vue';
+import ViewAssignment from '../components/Assignments/ViewAssignment.vue';
 import { app } from '../main.js';
 
 const routes = [
@@ -51,6 +52,12 @@ const routes = [
     component: Assignments,
     meta: { requiresAuth: true }
 
+  },
+  {
+    path: '/view-assignment/:assignmentId',
+    name: 'ViewAssignment',
+    component: ViewAssignment,
+    meta: { requiresAuth: true }
   },
   {
     path: '/:pathMatch(.*)*', 
