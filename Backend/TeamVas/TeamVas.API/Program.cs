@@ -8,6 +8,11 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using Castle.Core.Configuration;
 using TeamVas.API.Middleware;
+using Newtonsoft.Json.Linq;
+using System.Security.Claims;
+using System.Net.WebSockets;
+using TeamVas.API.Middleware.Chat;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,8 +39,9 @@ builder.Services.AddCors(options =>
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = configuration["URL"];
-        options.Audience = configuration["CLIENT"];
+        options.Authority = "http://localhost:8080/realms/TeamVas";
+        options.RequireHttpsMetadata = false;
+        options.Audience = "TeamVasClient";
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
@@ -45,7 +51,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
             RoleClaimType = "realm_access.roles",
         };
+        
     });
+
+builder.Services.AddHttpClient();
+builder.Services.AddSignalR();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -59,6 +69,8 @@ builder.Services.AddScoped<ExceptionMiddleware>();
 
 var app = builder.Build();
 
+
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -70,6 +82,9 @@ else
     app.UseHsts();
 }
 
+
+app.UseWebSockets();
+
 app.UseHttpsRedirection();
 
 app.UseCors("AllowWebApp");
@@ -77,6 +92,8 @@ app.UseCors("AllowWebApp");
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.MapHub<MessageHub>("/messagehub");
 
 app.MapControllers();
 

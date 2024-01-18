@@ -10,7 +10,9 @@
   import keycloak from './Utils/useAuth.jsx';
   import CourseDetail from '../Components/CourseDetail/CourseDetail.jsx'
   import AuthenticatedRoute from './Utils/AuthenticatedRoute';
+  import Chat from '../Components/Chat/Chat.jsx';
   import { ReactKeycloakProvider } from '@react-keycloak/web';
+
 
   function App() {
      
@@ -30,6 +32,11 @@
                 <Route path="/course/:courseId" element={
                 <AuthenticatedRoute>
                   <CourseDetail />
+                </AuthenticatedRoute>
+                } />
+                <Route path="/messages" element={
+                <AuthenticatedRoute>
+                  <Chat />
                 </AuthenticatedRoute>
                 } />
               </>

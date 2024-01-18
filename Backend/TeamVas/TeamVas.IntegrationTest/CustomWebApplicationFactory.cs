@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using TeamVas.DAL;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.AspNetCore.Authentication;
 
 namespace TeamVas.IntegrationTest
 {
@@ -33,6 +35,11 @@ namespace TeamVas.IntegrationTest
                 {
                     options.UseInMemoryDatabase("InMemoryDbForTesting");
                 });
+            });
+            builder.ConfigureTestServices(services =>
+            {
+                services.AddAuthentication("Test")
+                    .AddScheme<AuthenticationSchemeOptions, MockAuthenticationHandler>("Test", options => { });
             });
         }
     }

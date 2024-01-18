@@ -26,7 +26,6 @@ const routes = [
     path: '/courses',
     name: 'Courses',
     component: Courses,
-    meta: { requiresAuth: true }
   },
   {
     path: '/add-course',
@@ -80,6 +79,7 @@ router.beforeEach((to, from, next) => {
       return;
     }
 
+    console.log(app.config.globalProperties.$keycloak)
     if (!app.config.globalProperties.$keycloak.hasRealmRole('Teacher')) {
     console.log('No access');
     next({ name: 'NoAccess' });
