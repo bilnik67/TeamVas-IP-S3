@@ -43,7 +43,7 @@ namespace TeamVas.API.Controllers
             }
         }
         [HttpPost]
-        //[Authorize(Roles = "Teacher")]
+        [Authorize]
         public ActionResult<AssignmentDto> AddAssignment([FromBody] AssignmentDto assignmentDto)
         {
             try
@@ -60,7 +60,7 @@ namespace TeamVas.API.Controllers
         }
 
         [HttpPut("{id}")]
-        //[Authorize(Roles = "Teacher")]
+        [Authorize]
         public ActionResult UpdateAssignment([FromBody] AssignmentDto assignmentDto)
         {
             try
@@ -81,7 +81,7 @@ namespace TeamVas.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        //[Authorize(Roles = "Teacher")]
+        [Authorize]
         public ActionResult DeleteAssignment(int id)
         {
             try

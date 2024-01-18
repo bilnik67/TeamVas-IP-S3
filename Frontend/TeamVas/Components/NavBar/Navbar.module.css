@@ -1,3 +1,4 @@
+
 .navbar {
   position: fixed;
   top: 0;
@@ -56,9 +57,22 @@
 
 .userIcon {
   font-size: 24px;
-  margin-right: 10px;
 }
 
 .userName {
+  margin-top: -10%;
   font-size: 16px; 
+}
+.centerUserIcon {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  justify-content: center;
+}
+.centerUserSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
+  margin-bottom: 10%;
 }

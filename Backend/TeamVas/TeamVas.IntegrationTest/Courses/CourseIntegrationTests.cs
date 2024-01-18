@@ -13,6 +13,11 @@ using System.Net;
 using TeamVas.API.DTOs;
 using TeamVas.BLogic.Models;
 using System.Net.Http.Json;
+using System.Net.Http;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using System.Net.Http.Headers;
+using Azure;
 
 namespace TeamVas.IntegrationTest.Courses
 {
@@ -161,7 +166,7 @@ namespace TeamVas.IntegrationTest.Courses
         {
             _context.Courses.RemoveRange(_context.Courses);
             await _context.SaveChangesAsync();
-        }
+        } 
 
         private async Task ReseedDatabase()
         {
@@ -174,7 +179,7 @@ namespace TeamVas.IntegrationTest.Courses
             _context.Courses.AddRange(courses);
             await _context.SaveChangesAsync();
         }
-        
 
     }
+    
 }

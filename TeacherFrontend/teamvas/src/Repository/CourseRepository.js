@@ -5,7 +5,11 @@ const API_URL = 'https://localhost:7232/Courses';
 const CourseRepository = {
     async addCourse(courseDto) {
         try {
-            const response = await axios.post(API_URL, courseDto);
+            const token = localStorage.getItem('jwtToken'); 
+            const headers = {
+                Authorization: 'Bearer ' + token
+            };
+            const response = await axios.post(API_URL, courseDto, { headers: headers });
             return response.data;
         } catch (error) {
             console.error('There was an error adding the course:', error);
@@ -13,7 +17,11 @@ const CourseRepository = {
     },
     async updateCourse(courseId, courseDto) {
         try {
-            const response = await axios.put(`${API_URL}/${courseId}`, courseDto);
+            const token = localStorage.getItem('jwtToken'); 
+            const headers = {
+                Authorization: 'Bearer ' + token
+            };
+            const response = await axios.put(`${API_URL}/${courseId}`, courseDto, { headers: headers });
             return response.data;
         } catch (error) {
             console.error('There was an error updating the course:', error);
@@ -21,7 +29,11 @@ const CourseRepository = {
     },
     async deleteCourse(courseId) {
         try {
-            const response = await axios.delete(`${API_URL}/${courseId}`);
+            const token = localStorage.getItem('jwtToken'); 
+            const headers = {
+                Authorization: 'Bearer ' + token
+            };
+            const response = await axios.delete(`${API_URL}/${courseId}` , { headers: headers });
             return response.data;
         } catch (error) {
             console.error('There was an error deleting the course:', error);

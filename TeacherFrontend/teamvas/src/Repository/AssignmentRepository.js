@@ -5,7 +5,11 @@ const API_URL = 'https://localhost:7232/Assignments';
 const AssignmentRepository = {
     async addAssignment(assignmentDto) {
         try {
-            const response = await axios.post(API_URL, assignmentDto);
+            const token = localStorage.getItem('jwtToken'); 
+            const headers = {
+                Authorization: 'Bearer ' + token
+            };
+            const response = await axios.post(API_URL, assignmentDto, { headers: headers });
             return response.data;
         } catch (error) {
             console.error('There was an error adding the assignment:', error);
@@ -13,7 +17,11 @@ const AssignmentRepository = {
     },
     async updateAssignment(assignmentId, assignmentDto) {
         try {
-            const response = await axios.put(`${API_URL}/${assignmentId}`, assignmentDto);
+            const token = localStorage.getItem('jwtToken'); 
+            const headers = {
+                Authorization: 'Bearer ' + token
+            };
+            const response = await axios.put(`${API_URL}/${assignmentId}`, assignmentDto, { headers: headers });
             return response.data;
         } catch (error) {
             console.error('There was an error updating the assignment:', error);
@@ -21,7 +29,11 @@ const AssignmentRepository = {
     },
     async deleteAssignment(assignmentId) {
         try {
-            const response = await axios.delete(`${API_URL}/${assignmentId}`);
+            const token = localStorage.getItem('jwtToken'); 
+            const headers = {
+                Authorization: 'Bearer ' + token
+            };
+            const response = await axios.delete(`${API_URL}/${assignmentId}`, { headers: headers });
             return response.data;
         } catch (error) {
             console.error('There was an error deleting the assignment:', error);
