@@ -12,7 +12,14 @@ export default defineConfig({
         ws: true,
         changeOrigin: true,
         secure: false,
+        },
+      '/Assignments': {
+        target: 'https://localhost:7232/',
+        ws: true,
+        changeOrigin: true,
+        secure: false,
         }
       }
+      
   }
 })

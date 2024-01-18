@@ -54,6 +54,14 @@ const AssignmentRepository = {
         } catch (error) {
             console.error('There was an error fetching the assignment:', error);
         }
+    },
+    async getAllSubmittedAssignments(assignmentId) {
+        try {
+            const response = await axios.get(`${API_URL}/${assignmentId}/submissions`);
+            return response.data;
+        } catch (error) {
+            console.error('There was an error fetching the submitted assignments:', error);
+        }
     }
 }
 export default AssignmentRepository;

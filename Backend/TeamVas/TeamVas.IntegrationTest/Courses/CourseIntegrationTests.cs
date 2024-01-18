@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Net.Http.Headers;
 using Azure;
+using Newtonsoft.Json;
 
 namespace TeamVas.IntegrationTest.Courses
 {
@@ -59,9 +60,14 @@ namespace TeamVas.IntegrationTest.Courses
             }
             response.EnsureSuccessStatusCode();
             var stringResponse = await response.Content.ReadAsStringAsync();
+            var courses = JsonConvert.DeserializeObject<List<Course>>(stringResponse);
 
             // Assert
             Assert.NotNull(stringResponse);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode); 
+
+            Assert.NotNull(courses); 
+            Assert.NotEmpty(courses);
         }
         
 
@@ -122,7 +128,8 @@ namespace TeamVas.IntegrationTest.Courses
             // Arrange
             var existingCourse = new Course(1, "Updated Course", "Updated Course Description");
 
-            var content = new StringContent(JsonSerializer.Serialize(existingCourse), Encoding.UTF8, "application/json");
+            // Use Newtonsoft.Json.JsonConvert for serialization
+            var content = new StringContent(JsonConvert.SerializeObject(existingCourse), Encoding.UTF8, "application/json");
 
             // Act
             var response = await _client.PutAsync($"/courses/{existingCourse.Id}", content);

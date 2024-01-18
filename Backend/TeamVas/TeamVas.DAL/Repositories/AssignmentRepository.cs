@@ -73,5 +73,17 @@ namespace TeamVas.DAL.Repositories
                 _context.SaveChanges();
             }
         }
+        public void AddSubmission(AssignmentSubmissionService submission)
+        {
+            _context.Assignment_Submission.Add(submission);
+            _context.SaveChanges();
+        }
+
+        public IEnumerable<AssignmentSubmissionService> GetSubmissionsByAssignmentId(int assignmentId)
+        {
+            return _context.Assignment_Submission
+                           .Where(submission => submission.assignmentid == assignmentId)
+                           .ToList();
+        }
     }
 }

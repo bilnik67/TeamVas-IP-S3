@@ -100,6 +100,46 @@ namespace TeamVas.API.Controllers
                 return StatusCode(500, new { message = "An error occurred while deleting the assignment." });
             }
         }
+        [HttpGet("{assignmentId}/submissions")]
+        public ActionResult<IEnumerable<AssignmentSubmissionDto>> GetSubmissionsByAssignmentId(int assignmentId)
+        {
+            try
+            {
+                var submissions = _assignmentService.GetSubmissionsByAssignmentId(assignmentId);
+                return Ok(submissions);
+            }
+            catch (AssignmentNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error getting submissions for the assignment.", ex });
+            }
+        }
+        [HttpPost("{assignmentId}/submissions")]
+        public ActionResult SubmitAssignment(int assignmentId, [FromBody] AssignmentSubmissionDto submissionDto)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(submissionDto.Content))
+                {
+                    return BadRequest("Submission content cannot be empty.");
+                }
+
+                _assignmentService.AddSubmission(assignmentId, submissionDto.Content);
+
+                return Ok("Submission successfully added.");
+            }
+            catch (AssignmentNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error submitting assignment.", ex });
+            }
+        }
         private static AssignmentModel ConvertToAssignmentModel(AssignmentDto assignmentDto)
         {
             return new AssignmentModel(assignmentDto.Id, assignmentDto.Title, assignmentDto.Description);

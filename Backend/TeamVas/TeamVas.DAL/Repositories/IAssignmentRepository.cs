@@ -14,5 +14,7 @@ namespace TeamVas.DAL.Repositories
         Assignment AddAssignment(Assignment assignment);
         void UpdateAssignment(Assignment assignment);
         void DeleteAssignment(int assignmentId);
+        void AddSubmission(AssignmentSubmissionService submission);
+        IEnumerable<AssignmentSubmissionService> GetSubmissionsByAssignmentId(int assignmentId);
     }
 }

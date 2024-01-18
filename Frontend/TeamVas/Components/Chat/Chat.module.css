@@ -20,8 +20,8 @@
   .messagesList {
     flex-grow: 1;
     overflow-y: auto;
-    height: 650px;
-    max-height: 650px;
+    height: 400px;
+    max-height: 400px;
     margin-bottom: 20px;
     border-radius: 8px;
     border: 1px solid #ccc;
@@ -72,7 +72,7 @@
     font-size: 18px;
     margin-top: 2px;
     margin-bottom: 2px;
-    color: #000000ec; 
+    color: black; 
   }
   
   .divider {
@@ -82,8 +82,8 @@
   }
 
   .myMessage {
-    background-color: #0066ff;
-    color: #fff;
+    background-color: palegreen;
+    color: black;
     text-align: left;
     align-self: flex-end;
     margin-left: auto;

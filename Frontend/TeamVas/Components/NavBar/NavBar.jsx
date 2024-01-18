@@ -17,7 +17,7 @@ const NavBar = () => {
             <FontAwesomeIcon icon={faBook} className={styles.navIcon} />
             <span>Courses</span> 
         </Link>
-        <Link to="/" className={styles.navItem}>
+        <Link to="/Assignments" className={styles.navItem}>
             <FontAwesomeIcon icon={faFilePen} className={styles.navIcon} />
             <span>Assignments</span>
         </Link>

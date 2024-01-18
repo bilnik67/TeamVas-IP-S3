@@ -20,5 +20,6 @@ namespace TeamVas.DAL
 
         public DbSet<Course> Course { get; set; }
         public DbSet<Assignment> Assignment { get; set; }
+        public DbSet<AssignmentSubmissionService> Assignment_Submission { get; set; }
     }
 }

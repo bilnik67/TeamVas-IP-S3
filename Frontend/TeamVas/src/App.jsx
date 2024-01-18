@@ -10,6 +10,8 @@
   import keycloak from './Utils/useAuth.jsx';
   import CourseDetail from '../Components/CourseDetail/CourseDetail.jsx'
   import AuthenticatedRoute from './Utils/AuthenticatedRoute';
+  import Assignments from '../Components/Assignments/Assignment.jsx';
+  import HandInAssignment from '../Components/Assignments/HandInAssignment.jsx';
   import Chat from '../Components/Chat/Chat.jsx';
   import { ReactKeycloakProvider } from '@react-keycloak/web';
 
@@ -38,6 +40,16 @@
                 <AuthenticatedRoute>
                   <Chat />
                 </AuthenticatedRoute>
+                } />
+                <Route path="/assignments" element={
+                  <AuthenticatedRoute>
+                    <Assignments />
+                  </AuthenticatedRoute>
+                } />
+                <Route path="/handinassignment/:assignmentId" element={
+                  <AuthenticatedRoute>
+                    <HandInAssignment />
+                  </AuthenticatedRoute>
                 } />
               </>
             </Routes>

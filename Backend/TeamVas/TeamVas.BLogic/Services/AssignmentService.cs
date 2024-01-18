@@ -73,6 +73,21 @@ namespace TeamVas.BLogic.Services
         {
             _assignmentRepository.DeleteAssignment(assignmentId);
         }
+        public void AddSubmission(int assignmentId, string content)
+        {
+            var submission = new AssignmentSubmissionService
+            {
+                assignmentid = assignmentId,
+                Content = content
+            };
+
+            _assignmentRepository.AddSubmission(submission);
+        }
+
+        public IEnumerable<AssignmentSubmissionService> GetSubmissionsByAssignmentId(int assignmentId)
+        {
+            return _assignmentRepository.GetSubmissionsByAssignmentId(assignmentId);
+        }
 
     }
 }

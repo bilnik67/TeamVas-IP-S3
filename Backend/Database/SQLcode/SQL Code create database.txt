@@ -87,3 +87,10 @@ CREATE TABLE Student_Assignment (
     FOREIGN KEY (Student_ID) REFERENCES Student(ID),
     FOREIGN KEY (Assignment_ID) REFERENCES Assignment(ID)
 );
+CREATE TABLE assignment_submission (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    assignment_id INT,
+    content TEXT,
+    submitted_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (assignment_id) REFERENCES assignment(id)
+);
